@@ -7,6 +7,10 @@ import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
 import Providers from "@/components/Providers";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+import Link from "next/link";
+import { SignOutButton } from "@clerk/nextjs";
+import Nav from "@/features/home/Nav";
 
 
 
@@ -32,6 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <Providers>
           <div className="relative h-full">
+            <Nav/>
             <main
               id="skip-nav"
               className="mx-auto mb-16 max-w-5xl px-5 py-24 sm:px-8 min-h-[80vh]"
