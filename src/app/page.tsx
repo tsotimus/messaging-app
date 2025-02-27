@@ -3,6 +3,7 @@ import { HydratedDocument } from "mongoose";
 import { RoomDisplay } from "@/types/room";
 import Room from "@/models/Room";
 import RoomList from "@/features/room/RoomList";
+import { useUser } from "@clerk/nextjs";
 
 const getRooms = async () => {
 
