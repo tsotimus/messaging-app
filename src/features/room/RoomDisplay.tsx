@@ -11,7 +11,7 @@ export const RoomDisplay = () => {
 
     return (
         <div className="w-full h-full space-y-8">
-            <h1 className="text-center">Main Room</h1>
+            <h1 className="text-center text-3xl font-bold">Main Room</h1>
             {
                 match(user?.id).with(P.string, (id)=>{
                     return (

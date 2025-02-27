@@ -5,7 +5,7 @@ const RoomTitle = () => {
     const {user} = useUser()
 
     return (
-        <h1>Hello {user?.id} </h1>
+        <h1 className="text-1xl text-center font-bold">Welcome {user?.emailAddresses[0].emailAddress} </h1>
     )
 }
 
