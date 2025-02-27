@@ -21,8 +21,10 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if(req.method === "GET"){
-        const messages = await Message.find({}).sort({createdAt: 1}).limit(10)
-        return res.status(200).json(messages)
+        //TODO: Pagination later
+        const messages = await Message.find({})
+            .sort({createdAt: -1})
+        return res.status(200).json(messages.reverse())
     }
 
 }

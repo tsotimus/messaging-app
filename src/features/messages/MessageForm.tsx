@@ -7,6 +7,7 @@ import axios from "axios"
 import { FormProvider, useForm } from "react-hook-form"
 import { z } from "zod"
 import useSWRMutation from 'swr/mutation'
+import useGetMessages from "./useGetMessages"
 
 
 const FormSchema = z.object({
@@ -22,7 +23,8 @@ async function sendMessage(url:string, { arg }: { arg: MessageRequest }) {
 
 const MessageForm = () => {
 
-    const { trigger } = useSWRMutation('/api/v1/message', sendMessage)
+    const {data: messagesData} = useGetMessages()
+    const { trigger } = useSWRMutation('api/v1/message', sendMessage)
 
     const {user} = useUser()
 
@@ -36,15 +38,29 @@ const MessageForm = () => {
     const onSubmit = async(data:FormData) => {
         if(!user?.id)return;
 
+        const optimisticMessage = {
+            id: "optimistic_" + Math.random().toString(36).substring(2, 15),
+            text: data.message,
+            createdBy: user.id,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
         
         await trigger({
             text: data.message,
             createdBy: user.id
-        }).then((res)=>{
-            console.log(res)
+        }, {
+            optimisticData: (current) => [...(current ?? []), optimisticMessage],
+            rollbackOnError: true,
+            populateCache: false,
+            revalidate: true
+        }).then(()=>{
+            methods.reset()
         }).catch((err)=>{
             console.log(err)
         })
+
+
    
     }
 

@@ -1,17 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card"
 import useGetMessages from "./useGetMessages"
 import { cn } from "@/lib/utils"
+import { Loader2 } from "lucide-react"
 interface MessageDisplayProps {
     userId: string
 }
 
 const MessageDisplay = ({userId}:MessageDisplayProps) => {
 
-    const {data} = useGetMessages()
-    
+    const {data, isLoading, isValidating} = useGetMessages()
+    console.log(data, isLoading, isValidating)
 
     return (
-        <div className="w-full space-y-4 flex flex-col">
+        <div className="w-full h-[calc(100vh-25rem)] space-y-4 flex flex-col overflow-y-auto">
             {
                 data.map((message)=>{
                     const isCurrentUser = message.createdBy === userId
@@ -31,6 +32,13 @@ const MessageDisplay = ({userId}:MessageDisplayProps) => {
                         </div>
                     )
                 })
+            }
+            {
+                isLoading && (
+                    <div className="w-full flex justify-center items-center">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                    </div>
+                )
             }
         </div>
     )

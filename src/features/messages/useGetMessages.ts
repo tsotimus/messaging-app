@@ -5,12 +5,13 @@ import useSWR from 'swr'
 
 const useGetMessages = () => {
 
-    const {isLoading, data,error} = useSWR<MessagesDisplay, Errors>("api/v1/message", genericFetcher , {
+    const {isLoading, data,error, isValidating} = useSWR<MessagesDisplay, Errors>("api/v1/message", genericFetcher , {
         // fallbackData: 
     })
 
     return {
         isLoading,
+        isValidating,
         data: data ?? [],
         isErrors: error
     }
