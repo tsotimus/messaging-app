@@ -1,4 +1,4 @@
-import z from "node_modules/zod/lib";
+import { z } from "zod";
 
 export type MessageModel = {
     text: string;
