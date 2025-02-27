@@ -6,21 +6,21 @@ import { NextApiRequest, NextApiResponse } from "next"
 const MOCKS: MessageDisplay[] = [
   {
     id: "123",
-    createdBy: "Clarify",
+    createdBy: "user_2tcybdGFHbut2LkdDVxGUvVAJg6",
     text: "Hello everyone!",
     updatedAt: new Date().toISOString(),
     createdAt: new Date().toISOString(),
   },
   {
     id: "125",
-    createdBy: "Clarify",
+    createdBy: "user_2tcybdGFHbut2LkdDVxGUvVAJg6",
     text: "Hello",
     updatedAt: new Date().toISOString(),
     createdAt: new Date().toISOString(),
   },
   {
     id: "124",
-    createdBy: "Clarify",
+    createdBy: "user_2tcybdGFHbut2LkdDVxGUvVAJg6",
     text: "Hello to you too!",
     updatedAt: new Date().toISOString(),
     createdAt: new Date().toISOString(),
