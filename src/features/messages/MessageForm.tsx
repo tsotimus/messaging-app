@@ -1,3 +1,5 @@
+"use client"
+
 import TextAreaInput from "@/components/form/TextAreaInput"
 import { Button } from "@/components/ui/button"
 import { MessageRequest } from "@/types/message"
@@ -7,7 +9,6 @@ import axios from "axios"
 import { FormProvider, useForm } from "react-hook-form"
 import { z } from "zod"
 import useSWRMutation from 'swr/mutation'
-import useGetMessages from "./useGetMessages"
 
 
 const FormSchema = z.object({
@@ -21,9 +22,12 @@ async function sendMessage(url:string, { arg }: { arg: MessageRequest }) {
     await axios.post(url,arg)
   }
 
-const MessageForm = () => {
+interface MessageFormProps {
+    roomId: string
+}
+const MessageForm = ({roomId}: MessageFormProps) => {
 
-    const { trigger } = useSWRMutation('api/v1/message', sendMessage)
+    const { trigger } = useSWRMutation(`/api/v1/message?roomId=${roomId}`, sendMessage)
 
     const {user} = useUser()
 
@@ -35,7 +39,7 @@ const MessageForm = () => {
     const {handleSubmit, formState: {isValid}} = methods;
 
     const onSubmit = async(data:FormData) => {
-        if(!user?.id)return;
+        if(!user?.id || !roomId)return;
 
         const optimisticMessage = {
             id: "optimistic_" + Math.random().toString(36).substring(2, 15),
@@ -47,7 +51,7 @@ const MessageForm = () => {
         
         await trigger({
             text: data.message,
-            createdBy: user.id
+            roomId
         }, {
             optimisticData: (current) => [...(current ?? []), optimisticMessage],
             rollbackOnError: true,

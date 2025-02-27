@@ -6,11 +6,12 @@ import { useRef, useEffect } from "react"
 
 interface MessageDisplayProps {
     userId: string
+    roomId: string
 }
 
-const MessageDisplay = ({userId}:MessageDisplayProps) => {
+const MessageDisplay = ({userId, roomId}:MessageDisplayProps) => {
     const messagesEndRef = useRef<HTMLDivElement>(null)
-    const {data, isLoading} = useGetMessages()
+    const {data, isLoading} = useGetMessages({roomId})
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })

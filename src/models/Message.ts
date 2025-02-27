@@ -11,6 +11,11 @@ const MessageSchema = new mongoose.Schema<MessageModel>(
     createdBy: {
         type: String,
         required: [true, "Need to know who created the message"]
+    },
+    roomId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Room",
+        required: [true, "Need to know which room the message belongs to"]
     }
   },
   {

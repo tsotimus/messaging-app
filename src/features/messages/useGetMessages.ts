@@ -3,13 +3,16 @@ import { MessagesDisplay } from '@/types/message'
 import { genericFetcher } from '@/utils/client/fetcher'
 import useSWR from 'swr'
 
-const useGetMessages = () => {
+type UseGetMessagesProps = {
+    roomId: string
+}
+const useGetMessages = ({roomId}: UseGetMessagesProps) => {
 
-    const {isLoading, data,error, isValidating} = useSWR<MessagesDisplay, Errors>("api/v1/message", genericFetcher , {
+    const {isLoading, data,error, isValidating} = useSWR<MessagesDisplay, Errors>(`/api/v1/message?roomId=${roomId}`, genericFetcher , {
         refreshInterval: 10000  // Polling every 10 seconds
     })
 
-    return {
+return {
         isLoading,
         isValidating,
         data: data ?? [],

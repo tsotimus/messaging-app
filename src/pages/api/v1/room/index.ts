@@ -18,6 +18,10 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(400).json({error: validated.error.message})
             }
             const { userId } = getAuth(req)
+
+            if(!userId){
+                return res.status(401).json({error: "Unauthorized"})
+            }
             
             const roomData = {
                 ...validated.data,
@@ -33,10 +37,18 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if(req.method === "GET"){
-        //TODO: Pagination later
-        const rooms = await Room.find({})
+
+        try {
+            await dbConnect()
+            //TODO: Pagination later
+            const rooms = await Room.find({})
             .sort({createdAt: -1})
-        return res.status(200).json(rooms.reverse())
+            return res.status(200).json(rooms.reverse())
+        }catch(error){
+            console.log(error)
+            return res.status(500).json({error: "Internal Server Error"})
+        }
+
     }
 
 }
