@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbConnect"
-import Message from "@/models/Message"
-import { MessageRequestSchema } from "@/types/message"
+import Room from "@/models/Room"
+import { RoomRequestSchema } from "@/types/room"
 import { NextApiRequest, NextApiResponse } from "next"
 
 
@@ -11,26 +11,25 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
         try {
             await dbConnect()
 
-            const validated = MessageRequestSchema.safeParse(req.body)
+            const validated = RoomRequestSchema.safeParse(req.body)
     
             if(!validated.success){
                 return res.status(400).json({error: validated.error.message})
             }
-    
-            const message = await Message.create(validated.data)
-            
+            const message = await Room.create(validated.data)
             return res.status(200).json(message)
-        }catch(e){
-            console.log(e)
+            
+        }catch(error){
+            console.log(error)
             return res.status(500).json({error: "Internal Server Error"})
         }
     }
 
     if(req.method === "GET"){
         //TODO: Pagination later
-        const messages = await Message.find({})
+        const rooms = await Room.find({})
             .sort({createdAt: -1})
-        return res.status(200).json(messages.reverse())
+        return res.status(200).json(rooms.reverse())
     }
 
 }
