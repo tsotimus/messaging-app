@@ -1,3 +1,5 @@
+import z from "node_modules/zod/lib";
+
 export type MessageModel = {
     text: string;
     createdBy: string;
@@ -12,3 +14,11 @@ export type MessageDisplay = {
 }
 
 export type MessagesDisplay = Array<MessageDisplay>
+
+
+export const MessageRequestSchema = z.object({
+    text: z.string(),
+    createdBy: z.string(),
+})
+
+export type MessageRequest = z.infer<typeof MessageRequestSchema>

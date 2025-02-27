@@ -1,9 +1,13 @@
 import TextAreaInput from "@/components/form/TextAreaInput"
 import { Button } from "@/components/ui/button"
+import { MessageRequest } from "@/types/message"
 import { useUser } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios"
 import { FormProvider, useForm } from "react-hook-form"
 import { z } from "zod"
+import useSWRMutation from 'swr/mutation'
+
 
 const FormSchema = z.object({
     message: z.string()
@@ -11,7 +15,14 @@ const FormSchema = z.object({
 
 type FormData = z.infer<typeof FormSchema>
 
+
+async function sendMessage(url:string, { arg }: { arg: MessageRequest }) {
+    await axios.post(url,arg)
+  }
+
 const MessageForm = () => {
+
+    const { trigger } = useSWRMutation('/api/v1/message', sendMessage)
 
     const {user} = useUser()
 
@@ -22,11 +33,19 @@ const MessageForm = () => {
 
     const {handleSubmit, formState: {isValid}} = methods;
 
-    const onSubmit = (data:FormData) => {
+    const onSubmit = async(data:FormData) => {
         if(!user?.id)return;
 
-        // const 
-        console.log(data)
+        
+        await trigger({
+            text: data.message,
+            createdBy: user.id
+        }).then((res)=>{
+            console.log(res)
+        }).catch((err)=>{
+            console.log(err)
+        })
+   
     }
 
     return (
@@ -40,3 +59,4 @@ const MessageForm = () => {
 }
 
 export default MessageForm
+
