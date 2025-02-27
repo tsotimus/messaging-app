@@ -59,7 +59,7 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
 
 
             const messages = await Message.find({roomId: validated.data})
-            return res.status(200).json(messages.reverse())
+            return res.status(200).json(messages)
         }catch(e){
             console.log(e)
             return res.status(500).json({error: "Internal Server Error"})
