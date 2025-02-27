@@ -22,16 +22,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="w-full min-h-96" suppressHydrationWarning>
+    <html lang="en" className="w-full h-full" suppressHydrationWarning>
       <body
         className={cn(
           GeistSans.variable,
           GeistMono.variable,
-          "scroll-smooth font-sans"
+          "scroll-smooth font-sans h-full"
         )}
       >
         <Providers>
-          <div className="relative">
+          <div className="relative h-full">
             <main
               id="skip-nav"
               className="mx-auto mb-16 max-w-5xl px-5 py-24 sm:px-8 min-h-[80vh]"

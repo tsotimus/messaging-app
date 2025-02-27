@@ -1,6 +1,7 @@
 "use client"
 
 
+import CreateMessage from "../messages/CreateMessage"
 import MessageDisplay from "../messages/MessageDisplay"
 import RoomTitle from "./RoomTitle"
 import { useUser } from "@clerk/nextjs"
@@ -18,6 +19,7 @@ export const RoomDisplay = () => {
                         <>
                             <RoomTitle/>
                             <MessageDisplay userId={id} />
+                            <CreateMessage/>
                         </>
                     )
                 }).otherwise(()=>{
