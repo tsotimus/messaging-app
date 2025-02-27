@@ -1,6 +1,5 @@
-# Next-Quick
+# Message App
 
-A boilerplate for Next.js with a quick start.
 
 ## Demo
 
