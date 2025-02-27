@@ -1,10 +1,11 @@
-import useGetUsername from "../auth/useGetUsername"
+import { useUser } from "@clerk/nextjs"
 
 const RoomTitle = () => {
 
-    const username = useGetUsername()
+    const {user} = useUser()
+
     return (
-        <h1>Hello {username} </h1>
+        <h1>Hello {user?.id} </h1>
     )
 }
 

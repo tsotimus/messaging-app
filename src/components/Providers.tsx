@@ -4,7 +4,7 @@ import { Toaster } from "sonner";
 import { ThemeProvider, useTheme } from "next-themes";
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { type PropsWithChildren } from "react";
-
+import { ClerkProvider } from "@clerk/nextjs";
 
 type Theme = "light" | "dark";
 
@@ -33,10 +33,12 @@ const Providers = ({children}:PropsWithChildren) => {
       enableColorScheme
       disableTransitionOnChange
     >
+      <ClerkProvider>
           <NuqsAdapter>
             <ToasterSetup />
             {children}
           </NuqsAdapter>
+      </ClerkProvider>
     </ThemeProvider>
   );
 };
