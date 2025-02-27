@@ -18,7 +18,7 @@ export type MessagesDisplay = Array<MessageDisplay>
 
 export const MessageRequestSchema = z.object({
     text: z.string(),
-    createdBy: z.string(),
+    roomId: z.string()
 })
 
 export type MessageRequest = z.infer<typeof MessageRequestSchema>

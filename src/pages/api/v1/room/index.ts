@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/dbConnect"
 import Room from "@/models/Room"
 import { RoomRequestSchema } from "@/types/room"
+import { getAuth } from "@clerk/nextjs/server"
 import { NextApiRequest, NextApiResponse } from "next"
 
 
@@ -16,7 +17,13 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
             if(!validated.success){
                 return res.status(400).json({error: validated.error.message})
             }
-            const message = await Room.create(validated.data)
+            const { userId } = getAuth(req)
+            
+            const roomData = {
+                ...validated.data,
+                createdBy: userId
+            };
+            const message = await Room.create(roomData)
             return res.status(200).json(message)
             
         }catch(error){

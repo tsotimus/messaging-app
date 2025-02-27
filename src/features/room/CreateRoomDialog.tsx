@@ -1,13 +1,15 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogTrigger, DialogTitle, DialogHeader, DialogContent } from "@/components/ui/dialog"
 import CreateRoomForm from "./CreateRoomForm"
+import { useState } from "react"
 
 const CreateRoomDialog = () => {
-
-
+    const [open, setOpen] = useState(false)
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button variant="outline" className="cursor-pointer">Create Room</Button>
             </DialogTrigger>
@@ -15,7 +17,7 @@ const CreateRoomDialog = () => {
                 <DialogHeader>
                     <DialogTitle>Create Room</DialogTitle>
                 </DialogHeader>
-                <CreateRoomForm/>
+                <CreateRoomForm onSuccess={() => setOpen(false)}/>
             </DialogContent>
         </Dialog>
     )

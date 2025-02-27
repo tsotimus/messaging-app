@@ -23,7 +23,6 @@ async function sendMessage(url:string, { arg }: { arg: MessageRequest }) {
 
 const MessageForm = () => {
 
-    const {data: messagesData} = useGetMessages()
     const { trigger } = useSWRMutation('api/v1/message', sendMessage)
 
     const {user} = useUser()

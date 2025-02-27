@@ -1,11 +1,17 @@
+"use client"
+
 import { RoomsDisplay } from "@/types/room"
 import CreateRoomDialog from "./CreateRoomDialog"
+import useGetRooms from "./useGetRooms"
 
 interface RoomListProps {
     rooms: RoomsDisplay
 }
 
 const RoomList = ({rooms = []}: RoomListProps) => {
+
+    const {data: roomsData} = useGetRooms({fallbackData: rooms})
+
     return (
         <div>
             <div className="flex justify-between items-center">
@@ -13,7 +19,7 @@ const RoomList = ({rooms = []}: RoomListProps) => {
                 <CreateRoomDialog/>
             </div>
             {
-                rooms.map((room) => (
+                roomsData.map((room) => (
                     <div key={room.id}>
                         <h2>{room.name}</h2>
                     </div>
