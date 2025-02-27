@@ -2,14 +2,23 @@ import { Card, CardContent } from "@/components/ui/card"
 import useGetMessages from "./useGetMessages"
 import { cn } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
+import { useRef, useEffect } from "react"
+
 interface MessageDisplayProps {
     userId: string
 }
 
 const MessageDisplay = ({userId}:MessageDisplayProps) => {
+    const messagesEndRef = useRef<HTMLDivElement>(null)
+    const {data, isLoading} = useGetMessages()
 
-    const {data, isLoading, isValidating} = useGetMessages()
-    console.log(data, isLoading, isValidating)
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [data])
 
     return (
         <div className="w-full h-[calc(100vh-25rem)] space-y-4 flex flex-col overflow-y-auto">
@@ -40,6 +49,7 @@ const MessageDisplay = ({userId}:MessageDisplayProps) => {
                     </div>
                 )
             }
+            <div ref={messagesEndRef} />
         </div>
     )
 }
