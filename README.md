@@ -2,46 +2,20 @@
 
 A boilerplate for Next.js with a quick start.
 
-Included:
+## Scope
 
-- Next.js App directory
-- MongoDB via Mongoose
-- Tailwind
-- Shadcn
-- [Nuqs](https://nuqs.47ng.com/)
-- [Sonner](https://sonner.emilkowal.ski/)
+Minimum feature set:
 
+- Single chat room
+- Remember username between page loads, but no authentication required
+- No need to persist messages
+- Polling API
 
-## Getting Started
+There’s a number of other features and delighters that can be added to improve the app, such as:
 
-1. `pnpm install`
-2. Create your `.env.local` file following the `.env.example` file
-3. `pnpm dev`
-4. (Recommended) Use [MongoDB Compass](https://www.mongodb.com/products/tools/compass) when developing locally
+- WebSockets
+- Persisting messages to a DB
+- Authentication
+- Multiple chat rooms
 
-
-## Structure
-
-- `components/` - Re-usable React components
-- `features/` - Feature components
-- `app/` - Next.js app directory
-- `lib/` - Libraries to connect with 3rd parties (e.g S3, MongoDB)
-- `models/` - Mongoose models
-- `types/` - Typescript types
-- `utils/` - Utility functions, split between server and client
-- `styles/` - Global styles
-
-### Adding new env variables
-
-- Add the variable to `.env.example`
-- Add the variable to `env.d.ts`
-- Add the variable to `.env.local`
-
-
-  "aliases": {
-    "components": "@/components",
-    "utils": "@/utils/client/cn",
-    "ui": "@/components/ui",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
-  },
+Put as much work into any part of the app as you’d like, it’s totally fine if it’s beautiful but has less functionality or if it’s feature complete and looks bare bones. We’re excited to see what you enjoy working on!
