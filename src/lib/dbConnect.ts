@@ -28,6 +28,7 @@ async function dbConnect(): Promise<mongoose.Connection> {
 
     global.mongooseCache.promise = mongoose.connect(process.env.MONGODB_URI, {
         bufferCommands: false,
+        dbName: "message-app"
     }).then(mongoose => {
       // initialiseModels(); // Ensure models are used upon initial connection
       return mongoose.connection

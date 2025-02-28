@@ -1,9 +1,16 @@
 # Message App
 
-
 ## Demo
 
 ![Demo](./assets/demo.gif)
+
+## Getting Started
+
+1. `pnpm install`
+2. Copy `.env.example` to `.env.local` by running `cp .env.example .env.local`
+3. Populate the `.env.local` with Clerk credentials
+4. `docker compose up -d`
+5. `pnpm dev`
 
 ## Scope
 
