@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
-import { SignOutButton, useClerk, useUser,  } from "@clerk/nextjs"
+import { useClerk, useUser,  } from "@clerk/nextjs"
 import Link from "next/link"
 
 const NAV = () => {

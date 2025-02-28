@@ -16,6 +16,10 @@ const MessageSchema = new mongoose.Schema<MessageModel>(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Room",
         required: [true, "Need to know which room the message belongs to"]
+    },
+    delivered: {
+        type: Boolean,
+        default: false
     }
   },
   {

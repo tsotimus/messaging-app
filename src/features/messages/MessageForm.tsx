@@ -44,6 +44,7 @@ const MessageForm = ({roomId}: MessageFormProps) => {
         const optimisticMessage = {
             id: "optimistic_" + Math.random().toString(36).substring(2, 15),
             text: data.message,
+            delivered: false,
             createdBy: user.id,
             createdAt: new Date(),
             updatedAt: new Date()

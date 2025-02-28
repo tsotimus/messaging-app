@@ -5,6 +5,7 @@ export type MessageModel = {
     text: string;
     createdBy: string;
     roomId: Schema.Types.ObjectId;
+    delivered: boolean;
 }
 
 export type MessageDisplay = {
@@ -14,6 +15,7 @@ export type MessageDisplay = {
     createdBy:string;
     createdAt: string;
     updatedAt: string;
+    delivered: boolean;
 }
 
 export type MessagesDisplay = Array<MessageDisplay>

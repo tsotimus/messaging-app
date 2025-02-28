@@ -34,7 +34,8 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
 
             const msgData = {
                 ...validated.data,
-                createdBy: userId
+                createdBy: userId,
+                delivered: true
             }
 
     
